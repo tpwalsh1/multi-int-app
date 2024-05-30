@@ -81,7 +81,7 @@ if uploaded_file:
 if response.status_code == 200:
     pred_df = pd.DataFrame(json.loads(response.content)['predictions'])
     anomalies_df = pred_df[pred_df['preds_str'] == 'Anomaly']
-    # status.update(label="Status", state="Anomalies Found", expanded=False)
+    status.update(label="Status", state="Anomalies Found", expanded=False)
     with st.expander('Anomalies', expanded=True):
         st.dataframe(anomalies_df, height=210, use_container_width=True)
         # else:
