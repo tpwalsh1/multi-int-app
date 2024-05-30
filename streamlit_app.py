@@ -73,6 +73,9 @@ if response.status_code == 200:
     anomalies_df = pred_df[pred_df['preds_str'] == 'Anomaly']
     with st.expander('Anomalies', expanded=True):
         st.dataframe(anomalies_df, height=210, use_container_width=True)
+
+else:
+    None
         # else:
             # status.update(label="Status", state="Error Predicting AIS", expanded=False)
 
