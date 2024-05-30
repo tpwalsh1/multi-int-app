@@ -84,10 +84,10 @@ if uploaded_file:
         else:
             print(f"Error {response.status_code}: {response.text}")
 
-        if response.status_code == 200:
-            status.update(label="Status", state="Anomalies Found", expanded=False)
-        else:
-            status.update(label="Status", state="Error Getting Anomalies from Endpoint", expanded=False)
+        # if response.status_code == 200:
+        #     status.update(label="Status", state="Anomalies Found", expanded=False)
+        # else:
+        #     status.update(label="Status", state="Error Getting Anomalies from Endpoint", expanded=False)
 
     # Display data info
     # st.header('Anomalies', divider='rainbow')
