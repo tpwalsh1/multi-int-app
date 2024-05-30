@@ -18,7 +18,7 @@ with st.sidebar:
     # Load data
     st.header('1.1. Input data')
 
-    st.markdown('**1. Use custom data**')
+    st.markdown('**1.Insert AIS Data**')
     uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file, index_col=False)
