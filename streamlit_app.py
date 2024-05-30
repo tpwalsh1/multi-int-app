@@ -84,8 +84,7 @@ if uploaded_file:
             # status.update(label="Status", state="Anomalies Found", expanded=False)
             with st.expander('Anomalies', expanded=True):
                 st.dataframe(predictions_df, height=210, use_container_width=True)
-        else:
-            continue
+        # else:
             # status.update(label="Status", state="Error Predicting AIS", expanded=False)
 
         # if response.status_code == 200:
