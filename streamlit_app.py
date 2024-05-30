@@ -80,9 +80,12 @@ if uploaded_file:
         # Check if the request was successful
         if response.status_code == 200:
             predictions = response.json()
-            print("Predictions:", predictions)
+            predictions_df = pd.DataFrame(predictions['data'], columns=predictions['columns'])
+            status.update(label="Status", state="Anomalies Found", expanded=False)
+            with st.expander('Anomalies', expanded=True):
+                st.dataframe(predictions_df, height=210, use_container_width=True)
         else:
-            print(f"Error {response.status_code}: {response.text}")
+            status.update(label="Status", state="Error Predicting AIS", expanded=False)
 
         # if response.status_code == 200:
         #     status.update(label="Status", state="Anomalies Found", expanded=False)
