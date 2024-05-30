@@ -56,7 +56,7 @@ if uploaded_file:
         # Define the endpoint URL and authentication headers
         endpoint_url = "https://dbc-8db1117a-9cc7.cloud.databricks.com/serving-endpoints/ais/invocations"
         headers = {
-            "Authorization": "Bearer <DATABRICKS_TOKEN>",  # Replace with your Databricks token
+            "Authorization": "Bearer dapi8fe99adebf16e4147a7dfe041f223a9f",  # Replace with your Databricks token
             "Content-Type": "application/json"
         }
 
