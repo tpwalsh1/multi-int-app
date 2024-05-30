@@ -1,0 +1,35 @@
+flavors:
+  python_function:
+    data: data
+    env: conda.yaml
+    loader_module: application_package.mlflow_utils
+mlflow_version: 2.12.1
+model_uuid: 0f91c5808c854406bd07bda70f0411e3
+signature:
+  inputs: '[{"type": "long", "name": "Unnamed: 0", "required": true}, {"type": "long",
+    "name": "Unnamed: 0.1", "required": true}, {"type": "long", "name": "mmsi", "required":
+    true}, {"type": "double", "name": "longitude", "required": true}, {"type": "double",
+    "name": "latitude", "required": true}, {"type": "string", "name": "eta", "required":
+    true}, {"type": "string", "name": "vessel_type_main", "required": true}, {"type":
+    "double", "name": "sog", "required": true}, {"type": "string", "name": "source",
+    "required": true}, {"type": "long", "name": "ts_pos_utc", "required": true}, {"type":
+    "string", "name": "dt_pos_utc", "required": true}, {"type": "string", "name":
+    "TimeDelta", "required": true}, {"type": "double", "name": "Distance", "required":
+    true}, {"type": "double", "name": "Speed", "required": true}, {"type": "string",
+    "name": "ground_truth", "required": true}, {"type": "long", "name": "context_uid",
+    "required": false}]'
+  outputs: '[{"type": "long", "name": "Unnamed: 0", "required": true}, {"type": "long",
+    "name": "Unnamed: 0.1", "required": true}, {"type": "long", "name": "mmsi", "required":
+    true}, {"type": "double", "name": "longitude", "required": true}, {"type": "double",
+    "name": "latitude", "required": true}, {"type": "string", "name": "eta", "required":
+    true}, {"type": "string", "name": "vessel_type_main", "required": true}, {"type":
+    "double", "name": "sog", "required": true}, {"type": "string", "name": "source",
+    "required": true}, {"type": "long", "name": "ts_pos_utc", "required": true}, {"type":
+    "string", "name": "dt_pos_utc", "required": true}, {"type": "string", "name":
+    "TimeDelta", "required": true}, {"type": "double", "name": "Distance", "required":
+    true}, {"type": "double", "name": "Speed", "required": true}, {"type": "string",
+    "name": "ground_truth", "required": true}, {"type": "long", "name": "preds", "required":
+    true}, {"type": "string", "name": "probs", "required": true}, {"type": "string",
+    "name": "preds_str", "required": true}]'
+  params: null
+utc_time_created: '2024-05-30 19:18:39.796158'
