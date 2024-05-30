@@ -54,7 +54,7 @@ if uploaded_file:
         import pandas as pd
         
         # Load the model from the local directory
-        model_uri = "../ais-model"  # Adjust the path to your local model directory
+        model_uri = "ais-model"  # Adjust the path to your local model directory
         model = mlflow.pyfunc.load_model(model_uri)
         
         # Prepare input data
