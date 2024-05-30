@@ -97,12 +97,12 @@ if uploaded_file:
     # col[2].metric(label="No. of Training samples", value=X_train.shape[0], delta="")
     # col[3].metric(label="No. of Test samples", value=X_test.shape[0], delta="")
 
-    if 'columns' in predictions and 'data' in predictions:
-        # Convert to a DataFrame
-        predictions_df = pd.DataFrame(predictions['data'], columns=predictions['columns'])
+    # if 'columns' in predictions and 'data' in predictions:
+    #     # Convert to a DataFrame
+    #     predictions_df = pd.DataFrame(predictions['data'], columns=predictions['columns'])
         
-    with st.expander('Anomalies', expanded=True):
-        st.dataframe(predictions_df, height=210, use_container_width=True)
+    # with st.expander('Anomalies', expanded=True):
+    #     st.dataframe(predictions_df, height=210, use_container_width=True)
 #     with st.expander('Train split', expanded=False):
 #         train_col = st.columns((3,1))
 #         with train_col[0]:
