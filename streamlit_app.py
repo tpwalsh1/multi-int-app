@@ -73,9 +73,35 @@ if response.status_code == 200:
     anomalies_df = pred_df[pred_df['preds_str'] == 'Anomaly']
     with st.expander('Anomalies', expanded=True):
         st.dataframe(anomalies_df, height=210, use_container_width=True)
-
 else:
     None
+
+import streamlit as st
+import pandas as pd
+
+# Sample DataFrame
+data = {
+    'ID': [1, 2, 3],
+    'Column1': ['Row1', 'Row2', 'Row3'],
+    'Column2': [10, 20, 30]
+}
+anomalies_df = pd.DataFrame(data)
+
+# Display the DataFrame in an expander
+with st.expander('Anomalies', expanded=True):
+    st.dataframe(anomalies_df, height=210, use_container_width=True)
+
+# Allow the user to select a row based on a unique identifier (e.g., ID)
+selected_id = st.selectbox("Select a row by ID to perform an action:", anomalies_df['ID'])
+
+# Find the selected row
+selected_row = anomalies_df[anomalies_df['ID'] == selected_id]
+
+# Perform an action based on the selected row
+if not selected_row.empty:
+    st.write(f'You selected: {selected_row.to_dict(orient="records")[0]}')
+    # Perform any additional actions here
+
         # else:
             # status.update(label="Status", state="Error Predicting AIS", expanded=False)
 
