@@ -67,14 +67,14 @@ if uploaded_file:
         # Send the request
         response = requests.post(endpoint_url, headers=headers, data=data_json)
 
-# Check if the request was successful
-if response.status_code == 200:
-    pred_df = pd.DataFrame(json.loads(response.content)['predictions'])
-    anomalies_df = pred_df[pred_df['preds_str'] == 'Anomaly']
-    with st.expander('Anomalies', expanded=True):
-        st.dataframe(anomalies_df, height=210, use_container_width=True)
-else:
-    None
+# # Check if the request was successful
+# if response.status_code == 200:
+#     pred_df = pd.DataFrame(json.loads(response.content)['predictions'])
+#     anomalies_df = pred_df[pred_df['preds_str'] == 'Anomaly']
+#     with st.expander('Anomalies', expanded=True):
+#         st.dataframe(anomalies_df, height=210, use_container_width=True)
+# else:
+#     None
 
 import streamlit as st
 import pandas as pd
