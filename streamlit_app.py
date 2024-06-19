@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import numpy as np
+import requests
 
 # Haversine function to calculate distance in miles
 def haversine(lat1, lon1, lat2, lon2):
