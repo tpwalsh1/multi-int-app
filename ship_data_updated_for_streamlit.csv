@@ -2,6 +2,6 @@ Unnamed: 0,minio_url,lat,lon,pred_str
 0,s0009.png,-42.90,-60.53,ship
 0,s0010.png,-42.90,-60.53,ship
 0,s0011.png,-42.90,-100.53,ship
-0,s0003.png,-42.90,-60.53,water
-0,s0004.png,-100.90,-60.53,water
-0,s0005.png,-42.90,-100.53,water
+0,w0003.png,-42.90,-60.53,water
+0,w0004.png,-100.90,-60.53,water
+0,w0005.png,-42.90,-100.53,water
