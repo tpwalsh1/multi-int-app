@@ -69,7 +69,7 @@ if uploaded_file is not None:
     # Input for the radius
     radius = st.number_input("Enter the radius (in miles):", min_value=0.1, value=5.0, step=0.1)
 
-    signals_data = pd.read_csv('multi-int-app/sample_signals_data.csv')
+    signals_data = pd.read_csv('/multi-int-app/sample_signals_data.csv')
     filter_by_radius(df, center_lat, center_lon, radius)
 
     # Filter the second dataset based on the selected row's latitude and longitude and the specified radius
