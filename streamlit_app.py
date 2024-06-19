@@ -111,9 +111,12 @@ if uploaded_file is not None:
         # Filter DataFrame based on selected class
         filtered_df = filtered_ship_data[filtered_ship_data["pred_str"] == selected_class]
         
-        # Display images
+        # Display images and additional information
         for index, row in filtered_df.iterrows():
-            st.image(row["minio_url"], caption=row["pred_str"], use_column_width=True)
-
-    else:
-        st.write("The selected row does not contain 'latitude' and 'longitude' columns.")
+            st.subheader(row["title"])  # Display title
+            if row["pred_str"] == "ship":
+                st.image(row["minio_url"], caption="Ship Identified", use_column_width=True)  # Display image
+            else:
+                st.image(row["minio_url"], caption="Ship Not Identified", use_column_width=True)  # Display image
+            st.write(f"Latitude: {row['lat']}, Longitude: {row['lon']}")  # Display lat and lon
+            st.markdown("---")  # Divider between entries
