@@ -120,3 +120,8 @@ if uploaded_file is not None:
                 st.image(row["minio_url"], caption="Ship Not Identified", use_column_width=True)  # Display image
             st.write(f"Latitude: {row['lat']}, Longitude: {row['lon']}")  # Display lat and lon
             st.markdown("---")  # Divider between entries
+
+# To Do
+# Improve image model
+# Add image model deployment
+# Change signals 
