@@ -80,9 +80,26 @@ if uploaded_file is not None:
         center_lon = selected_row_dict["longitude"]
 
         filtered_signals_data = filter_by_radius(signals_data, center_lat, center_lon, radius)
+        filtered_signals_data['level_0'] = '1'
+        filtered_signals_data['index'] = '1'
+        
+        # Define the endpoint URL and authentication headers
+        endpoint_url = "https://dbc-8db1117a-9cc7.cloud.databricks.com/serving-endpoints/signals/invocations"
+        headers = {
+                    "Authorization": "Bearer dapi8fe99adebf16e4147a7dfe041f223a9f",  # Replace with your Databricks token
+                    "Content-Type": "application/json"
+        }
+        
+        # Prepare input data
+        # Convert DataFrame to JSON
+        data_json = """{"dataframe_split":""" + filtered_signals_data.to_json(orient='split') + """}"""
+                
+        # Send the request
+        response = requests.post(endpoint_url, headers=headers, data=data_json)
+        classified_signals_df = pd.json_normalize(json.loads(response.text)['predictions'])
 
         # Display the filtered second dataset
-        st.write("Filtered signals data within the specified radius:")
-        st.dataframe(filtered_signals_data)
+        st.write("Classified signals data within the specified radius:")
+        st.dataframe(classified_signals_df)
     else:
         st.write("The selected row does not contain 'latitude' and 'longitude' columns.")
