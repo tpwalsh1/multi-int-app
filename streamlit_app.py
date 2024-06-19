@@ -69,6 +69,21 @@ if uploaded_file is not None:
     # Input for the radius
     radius = st.number_input("Enter the radius (in miles):", min_value=0.1, value=5.0, step=0.1)
 
+    signals_data = pd.read_csv('multi-int-app/sample_signals_data.csv')
+    filter_by_radius(df, center_lat, center_lon, radius)
+
+    # Filter the second dataset based on the selected row's latitude and longitude and the specified radius
+    if "latitude" in selected_row_dict and "longitude" in selected_row_dict:
+        center_lat = selected_row_dict["latitude"]
+        center_lon = selected_row_dict["longitude"]
+
+        filtered_signals_data = filter_by_radius(signals_data, center_lat, center_lon, radius)
+
+        # Display the filtered second dataset
+        st.write("Filtered signals data within the specified radius:")
+        st.dataframe(filtered_signals_data)
+    else:
+        st.write("The selected row does not contain 'latitude' and 'longitude' columns.")
 
 
 
