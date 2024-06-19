@@ -1,13 +1,30 @@
 import streamlit as st
 import pandas as pd
 import json
-from geopy.distance import distance
+import numpy as np
+
+# Haversine function to calculate distance in miles
+def haversine(lat1, lon1, lat2, lon2):
+    # Radius of the Earth in miles
+    R = 3958.8
+    
+    # Convert latitude and longitude from degrees to radians
+    lat1, lon1, lat2, lon2 = map(np.radians, [lat1, lon1, lat2, lon2])
+    
+    # Difference in coordinates
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    
+    # Haversine formula
+    a = np.sin(dlat / 2.0)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2.0)**2
+    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
+    distance = R * c
+    return distance
 
 # Function to filter the second dataset
 def filter_by_radius(df, center_lat, center_lon, radius):
-    def within_radius(row):
-        return distance((center_lat, center_lon), (row['lat'], row['lon'])).miles <= radius
-    return df[df.apply(within_radius, axis=1)]
+    distances = df.apply(lambda row: haversine(center_lat, center_lon, row['lat'], row['lon']), axis=1)
+    return df[distances <= radius]
     
 # Title of the app
 st.title('Ship Analysis')
