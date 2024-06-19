@@ -1,20 +1,57 @@
 import streamlit as st
 import pandas as pd
+import json
+from geopy.distance import distance
 
+# Function to filter the second dataset
+def filter_by_radius(df, center_lat, center_lon, radius):
+    def within_radius(row):
+        return distance((center_lat, center_lon), (row['lat'], row['lon'])).miles <= radius
+    return df[df.apply(within_radius, axis=1)]
+    
 # Title of the app
-st.title('CSV Uploader and DataFrame Viewer')
+st.title('Ship Analysis')
 
 # File uploader
-uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+uploaded_file = st.file_uploader("Choose a CSV file with AIS Data", type="csv")
 
 # Check if a file has been uploaded
 if uploaded_file is not None:
     # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(uploaded_file)
 
+    # Define the endpoint URL and authentication headers
+    endpoint_url = "https://dbc-8db1117a-9cc7.cloud.databricks.com/serving-endpoints/ais/invocations"
+    headers = {
+                "Authorization": "Bearer dapi8fe99adebf16e4147a7dfe041f223a9f",  # Replace with your Databricks token
+                "Content-Type": "application/json"
+    }
+    
+    # Prepare input data
+    # Convert DataFrame to JSON
+    data_json = """{"dataframe_split":""" + df.to_json(orient='split') + """}"""
+            
+    # Send the request
+    response = requests.post(endpoint_url, headers=headers, data=data_json)
+    ais_df = pd.json_normalize(json.loads(response.text)['predictions'])
+    ais_anomalies_df = ais_df[ais_df['preds_str'] == 'Anomaly']
+
     # Display the DataFrame
-    st.write("Here's your DataFrame:")
-    st.dataframe(df)
+    st.write("AIS Anomalies:")
+    st.dataframe(ais_anomalies_df)
+
+   # Let the user select a specific row by displaying the DataFrame's index
+    row_index = st.selectbox("Select a row:", df.index)
+
+    # Display the selected row
+    st.write("You selected row index:", row_index)
+    st.write(df.loc[row_index])
+    selected_row = df.loc[row_index]
+
+    # Input for the radius
+    radius = st.number_input("Enter the radius (in miles):", min_value=0.1, value=5.0, step=0.1)
+
+
 
 
 # import streamlit as st
