@@ -106,14 +106,14 @@ if uploaded_file is not None:
         filtered_ship_data = filter_by_radius(ship_data, center_lat, center_lon, radius)
         
         # Sidebar filter for pred_str
-        selected_class = st.sidebar.selectbox("Select If Ship Is Present:", filtered_ship_data["pred_str"].unique())
+        # selected_class = st.sidebar.selectbox("Select If Ship Is Present:", filtered_ship_data["pred_str"].unique())
         
         # Filter DataFrame based on selected class
-        filtered_df = filtered_ship_data[filtered_ship_data["pred_str"] == selected_class]
+        filtered_df = filtered_ship_data # [filtered_ship_data["pred_str"] == selected_class]
         
         # Display images and additional information
         for index, row in filtered_df.iterrows():
-            st.subheader(row["title"])  # Display title
+            st.subheader("Images in Suspected Area")  # Display title
             if row["pred_str"] == "ship":
                 st.image(row["minio_url"], caption="Ship Identified", use_column_width=True)  # Display image
             else:
