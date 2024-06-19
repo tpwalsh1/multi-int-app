@@ -106,10 +106,10 @@ if uploaded_file is not None:
         filtered_ship_data = filter_by_radius(ship_data, center_lat, center_lon, radius)
         
         # Sidebar filter for pred_str
-        selected_class = st.sidebar.selectbox("Select If Ship Is Present:", df["pred_str"].unique())
+        selected_class = st.sidebar.selectbox("Select If Ship Is Present:", filtered_ship_data["pred_str"].unique())
         
         # Filter DataFrame based on selected class
-        filtered_df = df[df["pred_str"] == selected_class]
+        filtered_df = filtered_ship_data[filtered_ship_data["pred_str"] == selected_class]
         
         # Display images
         for index, row in filtered_df.iterrows():
