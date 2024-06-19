@@ -73,6 +73,7 @@ if uploaded_file is not None:
     radius = st.number_input("Enter the radius (in miles):", min_value=0.1, value=5.0, step=0.1)
 
     signals_data = pd.read_csv('sample_signals_data.csv')
+    ship_data = pd.read_csv("ship_data_updated_for_streamlit.csv")
 
     # Filter the second dataset based on the selected row's latitude and longitude and the specified radius
     if "latitude" in selected_row_dict and "longitude" in selected_row_dict:
@@ -101,5 +102,18 @@ if uploaded_file is not None:
         # Display the filtered second dataset
         st.write("Classified signals data within the specified radius:")
         st.dataframe(classified_signals_df)
+
+        filtered_ship_data = filter_by_radius(ship_data, center_lat, center_lon, radius)
+        
+        # Sidebar filter for pred_str
+        selected_class = st.sidebar.selectbox("Select If Ship Is Present:", df["pred_str"].unique())
+        
+        # Filter DataFrame based on selected class
+        filtered_df = df[df["pred_str"] == selected_class]
+        
+        # Display images
+        for index, row in filtered_df.iterrows():
+            st.image(row["minio_url"], caption=row["pred_str"], use_column_width=True)
+
     else:
         st.write("The selected row does not contain 'latitude' and 'longitude' columns.")
