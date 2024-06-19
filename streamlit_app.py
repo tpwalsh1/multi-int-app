@@ -112,8 +112,8 @@ if uploaded_file is not None:
         filtered_df = filtered_ship_data # [filtered_ship_data["pred_str"] == selected_class]
         
         # Display images and additional information
+        st.subheader("Images in Suspected Area")  # Display title
         for index, row in filtered_df.iterrows():
-            st.subheader("Images in Suspected Area")  # Display title
             if row["pred_str"] == "ship":
                 st.image(row["minio_url"], caption="Ship Identified", use_column_width=True)  # Display image
             else:
